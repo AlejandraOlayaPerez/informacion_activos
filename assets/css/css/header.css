@@ -1,0 +1,25 @@
+body{
+    margin-top:20px;
+    background:#eee;
+}
+
+.db-social .jumbotron {
+    margin: 0;
+    background-color: #ffffff;
+    height: 200px;
+    position: relative;
+}
+
+#nvr {
+position: relative;
+top: 105%;
+}
+
+#logoBlack {
+    margin: 0.5%;
+    
+    overflow: hidden;
+    position: relative;
+    top: 85%;
+    
+}
