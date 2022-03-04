@@ -1,3 +1,3 @@
 <?php 
-header("location: /activos_informacion/view/paginaprincipal.php");
+header("location: /informacion_activos/view/paginaprincipal.php");
 ?>
