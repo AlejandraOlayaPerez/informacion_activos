@@ -34,17 +34,17 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="/informacion_activos/view/activo de informacion" class="nav-link">
+                            <a href="/informacion_activos/view/informacion.php" class="nav-link">
                                 <div class="nav-field">Activos de informacion</div>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="#profile-media" class="nav-link">
+                            <a href="/informacion_activos/view/area.php" class="nav-link">
                                 <div class="nav-field">Area</div>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="#profile-followers" class="nav-link">
+                            <a href="/informacion_activos/view/categoria.php" class="nav-link">
                                 <div class="nav-field">Categoria</div>
                             </a>
                         </li>
