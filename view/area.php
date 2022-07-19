@@ -11,6 +11,7 @@ require_once 'header.php';
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/informacion_activos/assets/css/css/area.css" type="text/css">
+    <link rel="stylesheet" href="/informacion_activos/assets/css/css/areaModal.css" type="text/css">
     <title>Area</title>
 </head>
 
@@ -18,7 +19,7 @@ require_once 'header.php';
 
     <div id="container" class="container" style="margin-top: 30px;">
 
-        <button type="button" class="btn btn-success float-right" data-toggle="modal" data-target="#modal-area">Agregar Empresa</button>
+        <button type="button" class="btn btn-success float-right" data-toggle="modal" data-target="#modal-area"><i class="fas fa-plus-square"></i>  Agregar Empresa</button>
         <br>
         <div class="row">
             <?php
@@ -33,11 +34,11 @@ require_once 'header.php';
                         <h1 class="titulo"><?php echo $registro['area']; ?></h1>
 
                         <div class="footer">
-                            <a href="areaClasificacion.php?area=<?php echo $registro['id_area']; ?>" class="btn btn-info">Ver Lista</a>
+                            <a href="areaClasificacion.php?area=<?php echo $registro['id_area']; ?>" class="btn btn-info"> <i class="fas fa-eye"></i> Ver.</a>
                             <!-- data-id="<?php //echo $registro['id_area']; 
                                             ?> -->
-                            <a class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#modal-editar-area" onclick="ajaxEditarArea(<?php echo $registro['id_area']; ?>)">Editar</a>
-                            <a class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#eliminarArea" onclick="eliminarArea(<?php echo $registro['id_area']; ?>)"> Eliminar</a>
+                            <a class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#modal-editar-area" onclick="ajaxEditarArea(<?php echo $registro['id_area']; ?>)"><i class="fas fa-edit"></i> Editar</a>
+                            <a class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#eliminarArea" onclick="eliminarArea(<?php echo $registro['id_area']; ?>)"><i class="fas fa-trash-alt"></i> Eliminar</a>
                         </div>
 
                     </div>
@@ -47,10 +48,22 @@ require_once 'header.php';
             ?>
 
         </div>
+        <br>
+        <footer class="footer_area">
+            <div class="row">
+                <div class="col-12">
+                    <div class="single-footer-widget">
+                        <div class="footer"></div>
+                        <p>ESE RED DE SERVICIOS DE PRIMER NIVEL</p>
+                    </div>
+                </div>
+            </div>
+        </footer>
+        <br>
     </div>
 
 
-    <script src="/informacion_activos/assets/plugins/jquery/jquery.min.js"></script>
+
     <script src="../assets/js/js/eliminar.js"></script>
     <script src="../assets/js/js/validaciones.js"></script>
     <script>
@@ -67,14 +80,10 @@ require_once 'header.php';
             }).done(function(data) {
                 document.getElementById("editarArea").innerHTML = data['area'];
 
-
-
-
             })
         }
 
         function areaEditar(a) {
-
 
         }
     </script>
@@ -111,6 +120,7 @@ require_once 'header.php';
 
 </html>
 
+
 <!--MODAL PARA AGREGAR AREA-->
 <div class="modal fade" id="modal-area">
     <div class="modal-dialog">
@@ -121,8 +131,8 @@ require_once 'header.php';
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <div class="modal-body">
-                <form action="../controller/activocontroller.php" method="GET" id="formulario">
+            <div class="modal-body1">
+                <form action="../controller/activocontroller.php" method="GET" id="formulario" class="formulario">
 
                     <div class="col-12">
                         <label>Nombre Area<span class="text-danger">*</span></label>
@@ -133,9 +143,9 @@ require_once 'header.php';
             </div>
 
             <div class="modal-footer">
-                <button style="margin: 5px;" class="btn btn-success" type="button" onclick="validarPaginaFinal();"></i> Guardar</button>
+                <button style="margin: 5px;" class="btn btn-success" type="button" onclick="validarPaginaFinal();"><i class="fas fa-save"></i> Guardar</button>
                 </form>
-                <button type="button" class="btn btn-info" data-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal"> Cancelar</button>
             </div>
         </div>
     </div>
@@ -146,11 +156,13 @@ require_once 'header.php';
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="Label">Editar</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                <h4 class="modal-title">Editar Area</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
             </div>
-            <div class="modal-body">
-                <form action="../controller/activocontroller.php" method="GET" id="formulario2">
+            <div class="modal-body1">
+                <form action="../controller/activocontroller.php" method="GET" id="formulario2" class="formulario">
                     <div class="col-12">
                         <label>Nombre Area<span class="text-danger">*</span></label>
                         <input type="text" name="funcion" value="editarArea" style="display:none">
@@ -161,7 +173,7 @@ require_once 'header.php';
             </div>
 
             <div class="modal-footer">
-                <button style="margin: 5px;" class="btn btn-success" type="button" onclick="validarEditar();"></i> Guardar</button>
+                <button style="margin: 5px;" class="btn btn-success" type="button" onclick="validarEditar();"><i class="fas fa-save"></i> Guardar</button>
                 </form>
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"> Cancelar</button>
             </div>
@@ -174,17 +186,19 @@ require_once 'header.php';
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="Label">Eliminar</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                <h4 class="modal-title">Eliminar Area</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
             </div>
             <div class="modal-body">
-                <p>¿Esta seguro que desea eliminar esta area?</p>
+                <p id="text">¿Esta seguro que desea eliminar esta area?</p>
             </div>
             <div class="modal-footer">
                 <form action="../controller/activoController.php" method="GET">
                     <input type="text" name="id_area" id="areaEliminar" style="display: none;">
+                    <button type="submit" class="btn btn-danger" name="funcion" value="eliminarArea"><i class="fas fa-trash-alt"></i> Eliminar</button>
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"> Cancelar</button>
-                    <button type="submit" class="btn btn-danger" name="funcion" value="eliminarArea"> Eliminar</button>
                 </form>
             </div>
         </div>

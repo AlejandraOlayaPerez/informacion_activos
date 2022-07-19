@@ -11,10 +11,12 @@
     <link rel="stylesheet" href="/informacion_activos/assets/css/ionicons.min.css">
     <link rel="stylesheet" href="../assets/plugins/bs-stepper/css/bs-stepper.min.css">
     <link rel="stylesheet" href="../assets/plugins/fontawesome-free/css/fontawesome.css">
+    <link rel="stylesheet" href="../assets/plugins/fontawesome-free/css/all.min.css">
 
     <link rel="shortcut icon" href="/informacion_activos/image/logo.jpg" type="image/x-icon">
     <link rel="stylesheet" href="/informacion_activos/assets/css/css/header.css" type="text/css">
     <link rel="stylesheet" href="/informacion_activos/assets/css/css/bulma.css" type="text/css">
+    <link rel="stylesheet" href="/informacion_activos/assets/css/css/footer.css" type="text/css">
     <title>Activos de informacion</title>
 </head>
 
@@ -53,12 +55,28 @@
             </div>
         </div>
     </div>
+
+
+    
+
+
+    <script src="/informacion_activos/assets/plugins/jquery/jquery.min.js"></script>
+    <script src="/informacion_activos/assets/js/bootstrap.min.js"></script>
+    <script src="/informacion_activos/assets/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="../assets/plugins/bs-stepper/js/bs-stepper.min.js"></script>
+
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="/anyeale_proyecto/stylushanyeale_alejandra/assets/js/anyealejs/mensajecontroller.min.js"></script>
+    <script>
+        <?php
+        require_once '../controller/mensajecontroller.php';
+
+        if (isset($_GET['mensaje'])) {
+            $oMensaje = new mensajes();
+            echo $oMensaje->mensaje($_GET['tipoMensaje'], $_GET['mensaje']);
+        }
+        ?>
+    </script>
 </body>
 
 </html>
-
-<script src="/informacion_activos/assets/plugins/jquery/jquery.min.js"></script>
-<script src="/informacion_activos/assets/js/bootstrap.min.js"></script>
-<script src="/informacion_activos/assets/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-<script src="../assets/plugins/bs-stepper/js/bs-stepper.min.js"></script>
-

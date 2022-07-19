@@ -2,6 +2,7 @@
 require_once 'header.php';
 ?>
 
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -21,13 +22,14 @@ require_once 'header.php';
             <div class="card-header">
                 <div class="row">
                     <div class="col-md-6">
+                        <label>Buscar por formato</label>
                         <div class="input-group m-b-0">
                             <div class="input-group-prepend">
                                 <span class="input-group-text"><i class="fa fa-search"></i></span>
                             </div>
 
                             <select class="form-control" id="formato" name="formato" onchange="consultar()">
-                                <option value="" selected>Seleccionar Area</option>
+                                <option value="" selected>Seleccionar Formato</option>
                                 <option value="documento">Documento</option>
                                 <option value="documentoTXT">Documento TXT</option>
                                 <option value="documentoPublisher">Documento Publisher</option>
@@ -49,13 +51,14 @@ require_once 'header.php';
                         </div>
                     </div>
                     <div class="col-md-6">
+                        <label>Buscar por clasificacion</label>
                         <div class="input-group m-b-0">
                             <div class="input-group-prepend">
                                 <span class="input-group-text"><i class="fa fa-search"></i></span>
                             </div>
 
                             <select class="form-control" id="clasificar" name="clasificar" onchange="consultar()">
-                                <option value="" selected>Seleccionar</option>
+                                <option value="" selected>Seleccionar Clasificacion</option>
                                 <option value="DatosAbiertos">Datos Abiertos</option>
                                 <option value="InformacionPublicoClasificado">Informacion Publico Clasificado</option>
                                 <option value="InformacionPublicoReservado">Informacion Publico Reservado</option>
@@ -73,10 +76,8 @@ require_once 'header.php';
         </div>
 
         <div class="card">
-            <!-- <div class="card-body table-responsive p-0" style="height: 500px;">
-                <table class="table table-head-fixed text-nowrap"> -->
             <div class="card-body">
-                <table class="table table-responsive p-0" style="height: 500px" id="example1">
+                <table class="table table-responsive p-0" style="height: 1000px">
                     <thead>
                         <tr>
                             <th>#</th>
@@ -104,6 +105,18 @@ require_once 'header.php';
                 </table>
             </div>
         </div>
+
+        <footer class="footer_area">
+            <div class="row">
+                <div class="col-12">
+                    <div class="single-footer-widget">
+                        <div class="footer"></div>
+                        <p>ESE RED DE SERVICIOS DE PRIMER NIVEL</p>
+                    </div>
+                </div>
+            </div>
+        </footer>
+        <br>
     </div>
 
     <script src="../assets/js/js/informacion.js"></script>
@@ -120,25 +133,7 @@ require_once 'header.php';
     <script src="/informacion_activos/assets/plugins/datatables-buttons/js/buttons.html5.min.js"></script>
     <script src="/informacion_activos/assets/plugins/datatables-buttons/js/buttons.print.min.js"></script>
     <script src="/informacion_activos/assets/plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
-    <script>
-        $(function() {
-            $("#example1").DataTable({
-                "responsive": true,
-                "lengthChange": false,
-                "autoWidth": false,
-                "buttons": ["excel"]
-            }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
-            $('#example2').DataTable({
-                "paging": true,
-                "lengthChange": false,
-                "searching": false,
-                "ordering": true,
-                "info": true,
-                "autoWidth": false,
-                "responsive": true,
-            });
-        });
-    </script>
+
     </div>
 
 </body>

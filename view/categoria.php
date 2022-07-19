@@ -68,6 +68,17 @@ require_once 'header.php';
                 </div>
             </div>
         </div>
+        <footer class="footer_area">
+            <div class="row">
+                <div class="col-12">
+                    <div class="single-footer-widget">
+                        <div class="footer"></div>
+                        <p>ESE RED DE SERVICIOS DE PRIMER NIVEL</p>
+                    </div>
+                </div>
+            </div>
+        </footer>
+        <br>
     </div>
 </body>
 

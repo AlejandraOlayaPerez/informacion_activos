@@ -1,0 +1,53 @@
+.modal-header {
+    background-color: rgba(45, 118, 212, 0.87);
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 40px;
+    color: black;
+    font-weight: bold;
+}
+
+.modal-body1 {
+    background-color: #e4e9f19c;
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 40px;
+    color: black;
+    font-weight: bold;
+}
+
+.modal-footer {
+    background-color: rgba(45, 118, 212, 0.87);
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 40px;
+    color: black;
+    font-weight: bold;
+}
+
+.formulario{
+    width: 25%;
+    background-color: white;
+    border: 1px solid white;
+    margin: 20px;
+    padding: 20px;
+}
+
+#text{
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 20px;
+    
+}
+
+label{
+    font-size: 12px;
+    display: block;
+    width: 100%;
+}
+
+input{
+    margin-bottom: 20px;
+    width: 100%;
+    padding: 10px;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+}

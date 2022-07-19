@@ -9,17 +9,13 @@ function cargarJS() {
 }
 
 function consultar() {
-    var formato = document.getElementById("formato").value;
-    var clasificacion = document.getElementById("clasificar").value;
 
     $.ajax({
         url: '../controller/activocontroller.php',
         type: 'GET',
         data: {
             pagina: pagina,
-            formato: formato,
-            clasificacion: clasificacion,
-            funcion: "listarActivo"
+            funcion: "listarTablaAct"
         }
     }).done(function (data) {
         // console.log(data);
@@ -78,7 +74,7 @@ function consultar() {
     })
 }
 
-function agregarActivo(activo){
+function agregarActivo(activo) {
     var tr = document.createElement("tr");
     tr.id = activo['id_formato'];
 
@@ -133,6 +129,37 @@ function agregarActivo(activo){
     var td16 = document.createElement("td");
     td16.innerHTML = activo['nivel_tasacion'];
 
+    var td17 = document.createElement("td");
+
+    var botonEditar = document.createElement("a");
+    botonEditar.href = "actualizarInformacion.php?idFormato=" + activo['id_formato'];
+    botonEditar.style.margin = "2px";
+    botonEditar.className = "btn btn-warning";
+    botonEditar.innerHTML = '<i class="fas fa-edit"></i>';
+
+    var botonEliminar = document.createElement("a");
+    botonEliminar.className = "btn btn-danger";
+    botonEliminar.style.margin = "2px";
+    botonEliminar.setAttribute("data-bs-toggle", "modal");
+    botonEliminar.setAttribute("data-bs-target", "#eliminarFormulario3");
+    botonEliminar.value = activo['id_formato'];
+    botonEliminar.addEventListener('click', function () {
+        eliminarFormato(this);
+    });
+    botonEliminar.innerHTML = '<i class="fas fa-trash-alt"></i>';
+
+
+    var activo = document.getElementById("activoFuncion").value;
+    console.log(activo);
+
+    if (activo == "editar") {
+        td17.appendChild(botonEditar);
+    }
+
+    if (activo == "eliminar") {
+        td17.appendChild(botonEliminar);
+    }
+
     tr.appendChild(td0);
     tr.appendChild(td1);
     tr.appendChild(td2);
@@ -150,11 +177,11 @@ function agregarActivo(activo){
     tr.appendChild(td14);
     tr.appendChild(td15);
     tr.appendChild(td16);
+    tr.appendChild(td17);
 
     var contenedor = document.getElementById("listarActivo");
     contenedor.appendChild(tr);
 }
-
 
 function modificarPagina(campo) {
     if (campo == "-" && pagina > 1) {

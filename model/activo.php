@@ -94,7 +94,8 @@ class activo
         return $result;
     }
 
-    function consultarActivo($clasificacion){
+    function consultarActivo($clasificacion)
+    {
         //se instancia el objeto conectar
         $oConexion = new conectar();
         //se establece conexión con la base de datos
@@ -106,7 +107,7 @@ class activo
         //se ejecuta la consulta
         $result = mysqli_query($conexion, $sql);
         $result = mysqli_fetch_all($result, MYSQLI_ASSOC);
-        
+
         foreach ($result as $registro) {
             //se registra la consulta en los parametros
             $this->id_formato = $registro['id_formato'];
@@ -214,6 +215,124 @@ class activo
         $result = mysqli_query($conexion, $sql);
         $result = mysqli_fetch_all($result, MYSQLI_ASSOC);
         // echo $sql;
+        return $result;
+    }
+
+    function pag()
+    {
+        //Instancia clase conectar
+        $oConexion = new conectar();
+        //Establece conexion con la base de datos.
+        $conexion = $oConexion->conexion();
+
+        $sql = "SELECT count(id_formato) as numRegistro FROM formato WHERE eliminado=false";
+
+        $result = mysqli_query($conexion, $sql);
+        // echo $sql;
+        foreach ($result as $registro) {
+            $this->numRegistro = $registro['numRegistro'];
+        }
+        return $this->numRegistro;
+    }
+
+    function clas($pagina)
+    {
+        //se instancia el objeto conectar
+        $oConexion = new conectar();
+        //se establece conexión con la base datos
+        $conexion = $oConexion->conexion();
+
+        $inicio = (($pagina - 1) * 10);
+        $sql = "SELECT * FROM formato WHERE eliminado=false LIMIT 10 OFFSET $inicio";
+
+        //se ejecuta la consulta en la base de datos
+        $result = mysqli_query($conexion, $sql);
+        $result = mysqli_fetch_all($result, MYSQLI_ASSOC);
+        // echo $sql;
+        return $result;
+    }
+
+    function eliminarActivo()
+    {
+        //se instancia el objeto conectar
+        $oConexion = new conectar();
+        //se establece conexión con la base de datos
+        $conexion = $oConexion->conexion();
+
+        //consulta para eliminar el registro
+        $sql = "UPDATE formato SET eliminado=1 WHERE id_formato=$this->id_formato";
+
+        //se ejecuta la consulta
+        $result = mysqli_query($conexion, $sql);
+        return $result;
+    }
+
+    function consultarFormatoId($idFormato)
+    {
+        //se instancia el objeto conectar
+        $oConexion = new conectar();
+        //se establece conexión con la base de datos
+        $conexion = $oConexion->conexion();
+        //consulta para retornar un solo registro
+
+        $sql = "SELECT * FROM formato WHERE id_Formato=$idFormato";
+
+        //se ejecuta la consulta
+        $result = mysqli_query($conexion, $sql);
+        $result = mysqli_fetch_all($result, MYSQLI_ASSOC);
+
+        foreach ($result as $registro) {
+            //se registra la consulta en los parametros
+            $this->id_formato = $registro['id_formato'];
+            $this->id_area = $registro['id_area'];
+            $this->fecha = $registro['fecha'];
+            $this->activo = $registro['activo'];
+            $this->descripcion_activo = $registro['descripcion_activo'];
+            $this->fecha_modificacion = $registro['fecha_modificacion'];
+            $this->idioma = $registro['idioma'];
+            $this->conservacion = $registro['conservacion'];
+            $this->formato = $registro['formato'];
+            $this->informacion_publica = $registro['informacion_publica'];
+            $this->propietario_activo = $registro['propietario_activo'];
+            $this->nivel_confidencialidad = $registro['nivel_confidencialidad'];
+            $this->confidelidad = $registro['confidelidad'];
+            $this->integridad = $registro['integridad'];
+            $this->disponibilidad = $registro['disponibilidad'];
+            $this->valor = $registro['valor'];
+            $this->nivel_tasacion = $registro['nivel_tasacion'];
+        }
+    }
+
+    function actualizarActivo()
+    {
+        //se instancia el objeto conectar
+        $oConexion = new conectar();
+        //se establece conexión con la base de datos
+        $conexion = $oConexion->conexion();
+        //consulta para actualizar el registro
+
+        //sentencia para actualizar un producto
+        $sql = "UPDATE formato SET id_area=$this->id_area,
+            fecha='$this->fecha',
+            activo='$this->activo',
+            descripcion_activo='$this->descripcion_activo',
+            fecha_modificacion='$this->fecha_modificacion',
+            idioma='$this->idioma',
+            conservacion='$this->conservacion',
+            formato='$this->formato',
+            informacion_publica='$this->url',
+            propietario_activo='$this->propietario',
+            nivel_confidencialidad='$this->nivel_confidencialidad',
+            confidelidad=$this->confidencialidad,
+            integridad=$this->integridad,
+            disponibilidad=$this->disponibilidad,
+            valor=$this->valor,
+            nivel_tasacion='$this->nivel_tasacion'
+            WHERE id_formato=$this->id_formato";
+
+        //se ejecuta la consulta
+        $result = mysqli_query($conexion, $sql);
+        echo $sql;
         return $result;
     }
 }

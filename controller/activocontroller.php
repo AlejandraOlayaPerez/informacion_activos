@@ -37,6 +37,15 @@ switch ($funcion) {
     case "listarArea":
         $oactivoController->listarArea();
         break;
+    case "listarTablaAct":
+        $oactivoController->listarTablaAct();
+        break;
+    case "eliminarFormato":
+        $oactivoController->eliminarFormato();
+        break;
+    case "actualizarActivo":
+        $oactivoController->actualizarActivo();
+        break;
 }
 
 class activoController
@@ -49,9 +58,10 @@ class activoController
     public function nuevoActivo()
     {
         require_once '../model/activo.php';
+        require_once 'mensajecontroller.php';
+        $oMensaje = new mensajes();
 
         $oactivo = new activo();
-        // $oCargo->idServicio = $_GET['idServicio'];
         $oactivo->id_clasificacion = $_GET['numero'];
         $oactivo->id_area = $_GET['id_area'];
         $oactivo->fecha = $_GET['fecha'];
@@ -72,41 +82,81 @@ class activoController
         $result = $oactivo->crearActivo();
 
         if ($result) {
-            echo "Se guardo correctamente";
+            header("location: ../view/activoInformacion.php?tipoMensaje=" . $oMensaje->tipoCorrecto . "&mensaje=Se+ha+registrado+correctamente");
         } else {
-            echo "error al guardar";
+            header("location: ../view/activoInformacion.php?tipoMensaje=" . $oMensaje->tipoError . "&mensaje=Se+ha+producido+un+error");
         }
     }
+
+    public function actualizarActivo()
+    {
+        require_once '../model/activo.php';
+        require_once 'mensajecontroller.php';
+        $oMensaje = new mensajes();
+
+        $oactivo = new activo();
+        $oactivo->id_formato = $_GET['numero'];
+        $oactivo->id_area = $_GET['id_area'];
+        $oactivo->fecha = $_GET['fecha'];
+        $oactivo->activo = $_GET['activoNombre'];
+        $oactivo->descripcion_activo = $_GET['descripcionActivo'];
+        $oactivo->fecha_modificacion = $_GET['fechaModificacion'];
+        $oactivo->idioma = $_GET['idiomas'];
+        $oactivo->formato = $_GET['formato'];
+        $oactivo->conservacion = $_GET['conservacion'];
+        $oactivo->url = $_GET['url'];
+        $oactivo->propietario = $_GET['propietario'];
+        $oactivo->nivel_confidencialidad = $_GET['nivelConfidencialidad'];
+        $oactivo->confidencialidad = $_GET['confidencialidad'];
+        $oactivo->integridad = $_GET['integridad'];
+        $oactivo->disponibilidad = $_GET['disponibilidad'];
+        $oactivo->valor = $_GET['valor'];
+        $oactivo->nivel_tasacion = $_GET['nivelTasacion'];
+        $result = $oactivo->actualizarActivo();
+
+        if ($result) {
+            header("location: ../view/actualizarInformacion.php?tipoMensaje=" . $oMensaje->tipoCorrecto . "&mensaje=Se+ha+actualizado+correctamente"."&idFormato=" . $_GET['numero']."&activo=editar");
+        } else {
+            header("location: ../view/actualizarInformacion.php?tipoMensaje=" . $oMensaje->tipoError . "&mensaje=Se+ha+producido+un+error"."&idFormato=" . $_GET['numero']."&activo=editar");
+      
+        }
+    }
+
+
 
     //Area
 
     public function nuevaArea()
     {
         require_once '../model/area.php';
+        require_once 'mensajecontroller.php';
+        $oMensaje = new mensajes();
 
         $oArea = new area();
         $oArea->area = $_GET['areaNombre'];
         $result = $oArea->crearArea();
 
         if ($result) {
-            echo "Se agrego el area correctamente";
+            header("location: ../view/area.php?tipoMensaje=" . $oMensaje->tipoCorrecto . "&mensaje=Se+ha+registrado+correctamente");
         } else {
-            echo "Error al guardar";
+            header("location: ../view/area.php?tipoMensaje=" . $oMensaje->tipoError . "&mensaje=Se+ha+producido+un+error");
         }
     }
 
     public function eliminarArea()
     {
         require_once '../model/area.php';
+        require_once 'mensajecontroller.php';
+        $oMensaje = new mensajes();
 
         $oArea = new area();
         $oArea->id_area = $_GET['id_area'];
         $result = $oArea->eliminarArea();
 
         if ($result) {
-            echo "Se elimino el area correctamente";
+            header("location: ../view/area.php?tipoMensaje=" . $oMensaje->tipoCorrecto . "&mensaje=Se+ha+eliminado+correctamente");
         } else {
-            echo "Error al eliminar";
+            header("location: ../view/area.php?tipoMensaje=" . $oMensaje->tipoError . "&mensaje=Se+ha+producido+un+error");
         }
     }
 
@@ -122,6 +172,8 @@ class activoController
     public function editarArea()
     {
         require_once '../model/area.php';
+        require_once 'mensajecontroller.php';
+        $oMensaje = new mensajes();
 
         $oArea = new area();
         $oArea->id_area = $_GET['id_area'];
@@ -130,9 +182,9 @@ class activoController
 
 
         if ($result) {
-            echo "Se actualizo el area correctamente";
+            header("location: ../view/area.php?tipoMensaje=" . $oMensaje->tipoCorrecto . "&mensaje=Se+ha+editado+correctamente");
         } else {
-            echo "Error al actualizar";
+            header("location: ../view/area.php?tipoMensaje=" . $oMensaje->tipoError . "&mensaje=Se+ha+producido+un+error");
         }
     }
 
@@ -173,5 +225,55 @@ class activoController
         echo $delimitador;
         $datos = $oActivo->area($_GET['clasificacion'], $_GET['pagina']);
         echo json_encode($datos);
+    }
+
+    public function consultarArea()
+    {
+        require_once '../model/area.php';
+
+        $oArea = new area();
+        $oArea->areaConsultar($_GET['area']);
+        return $oArea;
+    }
+
+    public function listarTablaAct()
+    {
+        require_once '../model/activo.php';
+
+        $oActivo = new activo();
+        $paginacion = $oActivo->pag();
+        echo $paginacion;
+        $delimitador = "®";
+        echo $delimitador;
+        $datos = $oActivo->clas($_GET['pagina']);
+        echo json_encode($datos);
+    }
+
+    public function eliminarFormato()
+    {
+        require_once '../model/activo.php';
+
+        require_once 'mensajecontroller.php';
+        $oMensaje = new mensajes();
+
+        $oActivo = new activo();
+        $oActivo->id_formato = $_GET['idFormato'];
+        $oActivo->eliminarActivo();
+
+        if ($oActivo->eliminarActivo()) {
+            header("location: ../view/tablaAct.php?tipoMensaje=" . $oMensaje->tipoCorrecto . "&mensaje=Se+ha+eliminado+correctamente+el+activo+de+informacion"."&activo=editar"."&idFormato=" . $_GET['idFormato']);
+        } else {
+            header("location: ../view/tablaAct.php?tipoMensaje=" . $oMensaje->tipoError . "&mensaje=Se+ha+producido+un+error"."&activo=editar"."&idFormato=" . $_GET['idFormato']);
+        }
+    }
+
+    public function consultarFormatoId($id_formato)
+    {
+        require_once '../model/activo.php';
+
+        $oActivo = new activo();
+        $oActivo->consultarFormatoId($id_formato);
+
+        return $oActivo;
     }
 }

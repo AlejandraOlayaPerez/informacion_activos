@@ -96,18 +96,39 @@ class area
         return $result;
     }
 
-    function editarArea(){
-          //se instancia el objeto conectar
-          $oConexion = new conectar();
-          //se establece conexión con la base datos
-          $conexion = $oConexion->conexion();
-  
-          //sentencia que permite actualizar un  empleado
-          $sql = "UPDATE area SET area='$this->area'
+    function areaConsultar($area)
+    {
+        //se instancia el objeto conectar
+        $oConexion = new conectar();
+        //se establece conexión con la base de datos
+        $conexion = $oConexion->conexion();
+
+        //consulta para retornar un solo registro
+        $sql = "SELECT * FROM area WHERE id_area=$area AND eliminado=false";
+
+        //se ejecuta la consulta
+        $result = mysqli_query($conexion, $sql);
+        $result = mysqli_fetch_all($result, MYSQLI_ASSOC);
+        foreach ($result as $registro) {
+            //se registra la consulta en los parametros
+            $this->id_area = $registro['id_area'];
+            $this->area = $registro['area'];
+        }
+    }
+
+    function editarArea()
+    {
+        //se instancia el objeto conectar
+        $oConexion = new conectar();
+        //se establece conexión con la base datos
+        $conexion = $oConexion->conexion();
+
+        //sentencia que permite actualizar un  empleado
+        $sql = "UPDATE area SET area='$this->area'
           WHERE id_area=$this->id_area;";
-  
-          //se ejecuta la consulta
-          $result = mysqli_query($conexion, $sql);
-          return $result;
+
+        //se ejecuta la consulta
+        $result = mysqli_query($conexion, $sql);
+        return $result;
     }
 }

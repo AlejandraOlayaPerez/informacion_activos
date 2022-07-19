@@ -114,7 +114,7 @@ function agregarActivo(activo) {
     td11.innerHTML = activo['nivel_confidencialidad'];
 
     var td12 = document.createElement("td");
-    td12.innerHTML = activo['confidencialidad'];
+    td12.innerHTML = activo['confidelidad'];
 
     var td13 = document.createElement("td");
     td13.innerHTML = activo['integridad'];

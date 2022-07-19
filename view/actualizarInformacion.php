@@ -2,6 +2,9 @@
 require_once 'header.php';
 date_default_timezone_set('America/Bogota');
 $fechaActual = Date("Y-m-d");
+
+require_once '../controller/activocontroller.php';
+$oActivo = $oactivoController->consultarFormatoId($_GET['idFormato']);
 ?>
 
 <!DOCTYPE html>
@@ -11,13 +14,16 @@ $fechaActual = Date("Y-m-d");
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Crear Activo.</title>
+    <title>Modificar Activo.</title>
 </head>
 
 <body>
     <div id="container" class="container" style="margin-top: 30px;">
+        <?php
+
+        ?>
         <form action="../controller/activocontroller.php" method="GET" id="formulario">
-            <input type="text" name="funcion" value="nuevoActivo" style="display: none;">
+            <input type="text" name="funcion" value="actualizarActivo" style="display: none;">
 
             <div class="row">
                 <div class="col-md-12">
@@ -56,7 +62,7 @@ $fechaActual = Date("Y-m-d");
                                         <div class="row">
                                             <div class="col col-xl-4 col-md-6 col-12">
                                                 <label>#</label>
-                                                <input type="number" class="form-control" id="numero" name="numero" min="1" max="500" required>
+                                                <input type="number" class="form-control" id="numero" name="numero" value="<?php echo $oActivo->id_formato; ?>" min="1" max="500" required>
                                                 <span id="numeroSpan"></span>
                                             </div>
                                             <div class="col col-xl-4 col-md-6 col-12">
@@ -70,7 +76,9 @@ $fechaActual = Date("Y-m-d");
                                                     <option value="" disabled selected>Selecciones una opción</option>
                                                     <?php foreach ($result as $registro) {
                                                     ?>
-                                                        <option value="<?php echo $registro['id_area']; ?>"><?php echo $registro['area']; ?></option>
+                                                        <option value="<?php echo $registro['id_area']; ?>" <?php if ($oActivo->id_area) {
+                                                                                                                echo "selected";
+                                                                                                            } ?>><?php echo $registro['area']; ?></option>
                                                     <?php
                                                     }
                                                     ?>
@@ -84,23 +92,23 @@ $fechaActual = Date("Y-m-d");
                                             </div>
                                             <div class="col col-xl-4 col-md-6 col-12">
                                                 <label>Activo<span class="text-danger">*</span></label>
-                                                <input type="text" class="form-control" id="activoNombre" name="activoNombre" minlength="1" maxlength="100" required>
+                                                <input type="text" class="form-control" id="activoNombre" name="activoNombre" value="<?php echo $oActivo->activo; ?>" minlength="1" maxlength="100" required>
                                                 <span id="activoNombreSpan"></span>
                                             </div>
                                             <div class="col col-xl-4 col-md-6 col-12">
                                                 <label>Descripcion<span class="text-danger">*</span></label>
-                                                <input type="text" class="form-control" id="descripcionActivo" name="descripcionActivo" minlength="1" maxlength="100" required>
+                                                <input type="text" class="form-control" id="descripcionActivo" name="descripcionActivo" value="<?php echo $oActivo->descripcion_activo; ?>" minlength="1" maxlength="100" required>
                                                 <span id="descripcionActivoSpan"></span>
                                             </div>
                                             <div class="col col-xl-4 col-md-6 col-12">
                                                 <label>Fecha de modificacion<span class="text-danger">*</span></label>
-                                                <input type="Date" class="form-control" id="fechaModificacion" name="fechaModificacion" required>
+                                                <input type="Date" class="form-control" id="fechaModificacion" name="fechaModificacion" value="<?php echo $oActivo->fecha_modificacion; ?>" required>
                                                 <span id="fechaModificacionSpan"></span>
                                             </div>
                                         </div>
                                         <br>
                                         <button style="margin: 5px;" class="btn btn-info float-right" type="button" onclick="validarPagina1();"></i> Siguiente</button>
-                                        <a style="margin: 5px;" href="paginaprincipal.php" class="btn btn-dark"> Atras</a>
+                                        <a style="margin: 5px;" href="tablaAct.php" class="btn btn-dark"> Atras</a>
                                     </div>
 
                                     <div id="descripcion-part" class="content" role="tabpanel" aria-labelledby="descripcion-part-trigger">
@@ -109,8 +117,12 @@ $fechaActual = Date("Y-m-d");
                                                 <label>Idioma<span class="text-danger">*</span></label>
                                                 <select class="form-control" id="idioma" name="idiomas" required>
                                                     <option value="" selected>Seleccionar</option>
-                                                    <option value="Español">Español</option>
-                                                    <option value="Ingles">Ingles</option>
+                                                    <option value="Español" <?php if ($oActivo->idioma) {
+                                                                                echo "selected";
+                                                                            } ?>>Español</option>
+                                                    <option value="Ingles" <?php if ($oActivo->idioma) {
+                                                                                echo "selected";
+                                                                            } ?>>Ingles</option>
                                                 </select>
                                                 <span id="idiomaSpan"></span>
                                             </div>
@@ -118,8 +130,12 @@ $fechaActual = Date("Y-m-d");
                                                 <label>Medio de conservacion<span class="text-danger">*</span></label>
                                                 <select class="form-control" id="formato" name="formato" required>
                                                     <option value="" selected>Seleccionar</option>
-                                                    <option value="Digital">Digital</option>
-                                                    <option value="Fisico">Fisico</option>
+                                                    <option value="Digital" <?php if ($oActivo->conservacion) {
+                                                                                echo "selected";
+                                                                            } ?>>Digital</option>
+                                                    <option value="Fisico" <?php if ($oActivo->conservacion) {
+                                                                                echo "selected";
+                                                                            } ?>>Fisico</option>
                                                 </select>
                                                 <span id="formatoSpan"></span>
                                             </div>
@@ -127,34 +143,68 @@ $fechaActual = Date("Y-m-d");
                                                 <label>Formato<span class="text-danger">*</span></label>
                                                 <select class="form-control" id="conservacion" name="conservacion" required>
                                                     <option value="" selected>Seleccionar</option>
-                                                    <option value="documento">Documento</option>
-                                                    <option value="documentoTXT">Documento TXT</option>
-                                                    <option value="documentoPublisher">Documento Publisher</option>
-                                                    <option value="documentoPDF">Documento PDF</option>
-                                                    <option value="holadecalculo">Hoja de calculo</option>
-                                                    <option value="presentacion">Presentacion</option>
-                                                    <option value="basedatos">Base de datos</option>
-                                                    <option value="imagen">Imagen</option>
-                                                    <option value="audio">Audio</option>
-                                                    <option value="video">Video</option>
-                                                    <option value="animacion">Animacion</option>
-                                                    <option value="archivoICS">Archivos ICS</option>
-                                                    <option value="archivoSCV">Archivos SVC</option>
-                                                    <option value="archivoRar">Archivos Rar</option>
-                                                    <option value="web">Web</option>
-                                                    <option value="correoElectronico">correo Electronico</option>
-                                                    <option value="mensajeInstantanea">Mensaje Instantanea</option>
+                                                    <option value="documento" <?php if ($oActivo->formato) {
+                                                                                    echo "selected";
+                                                                                } ?>>Documento</option>
+                                                    <option value="documentoTXT" <?php if ($oActivo->formato) {
+                                                                                        echo "selected";
+                                                                                    } ?>>Documento TXT</option>
+                                                    <option value="documentoPublisher" <?php if ($oActivo->formato) {
+                                                                                            echo "selected";
+                                                                                        } ?>>Documento Publisher</option>
+                                                    <option value="documentoPDF" <?php if ($oActivo->formato) {
+                                                                                        echo "selected";
+                                                                                    } ?>>Documento PDF</option>
+                                                    <option value="holadecalculo" <?php if ($oActivo->formato) {
+                                                                                        echo "selected";
+                                                                                    } ?>>Hoja de calculo</option>
+                                                    <option value="presentacion" <?php if ($oActivo->formato) {
+                                                                                        echo "selected";
+                                                                                    } ?>>Presentacion</option>
+                                                    <option value="basedatos" <?php if ($oActivo->formato) {
+                                                                                    echo "selected";
+                                                                                } ?>>Base de datos</option>
+                                                    <option value="imagen" <?php if ($oActivo->formato) {
+                                                                                echo "selected";
+                                                                            } ?>>Imagen</option>
+                                                    <option value="audio" <?php if ($oActivo->formato) {
+                                                                                echo "selected";
+                                                                            } ?>>Audio</option>
+                                                    <option value="video" <?php if ($oActivo->formato) {
+                                                                                echo "selected";
+                                                                            } ?>>Video</option>
+                                                    <option value="animacion" <?php if ($oActivo->formato) {
+                                                                                    echo "selected";
+                                                                                } ?>>Animacion</option>
+                                                    <option value="archivoICS" <?php if ($oActivo->formato) {
+                                                                                    echo "selected";
+                                                                                } ?>>Archivos ICS</option>
+                                                    <option value="archivoSCV" <?php if ($oActivo->formato) {
+                                                                                    echo "selected";
+                                                                                } ?>>Archivos SVC</option>
+                                                    <option value="archivoRar" <?php if ($oActivo->formato) {
+                                                                                    echo "selected";
+                                                                                } ?>>Archivos Rar</option>
+                                                    <option value="web" <?php if ($oActivo->formato) {
+                                                                            echo "selected";
+                                                                        } ?>>Web</option>
+                                                    <option value="correoElectronico" <?php if ($oActivo->formato) {
+                                                                                            echo "selected";
+                                                                                        } ?>>correo Electronico</option>
+                                                    <option value="mensajeInstantanea" <?php if ($oActivo->formato) {
+                                                                                            echo "selected";
+                                                                                        } ?>>Mensaje Instantanea</option>
                                                 </select>
                                                 <span id="conservacionSpan"></span>
                                             </div>
                                             <div class="col col-xl-4 col-md-6 col-12">
                                                 <label>Url<span class="text-danger">*</span></label>
-                                                <input type="text" class="form-control" id="url" name="url" minlength="1" maxlength="10000" required>
+                                                <input type="text" class="form-control" id="url" name="url" value="<?php echo $oActivo->informacion_publica; ?>" minlength="1" maxlength="10000" required>
                                                 <span id="urlSpan"></span>
                                             </div>
                                             <div class="col col-xl-4 col-md-6 col-12">
                                                 <label>Propietario<span class="text-danger">*</span></label>
-                                                <input type="Text" class="form-control" id="propietario" name="propietario" minlength="1" maxlength="100" required>
+                                                <input type="Text" class="form-control" id="propietario" name="propietario" value="<?php echo $oActivo->propietario_activo; ?>" minlength="1" maxlength="100" required>
                                                 <span id="propietarioSpan"></span>
                                             </div>
                                         </div>
@@ -169,9 +219,15 @@ $fechaActual = Date("Y-m-d");
                                                 <label>Nivel Confidencialidad<span class="text-danger">*</span></label>
                                                 <select class="form-control" id="nivelConfidencialidad" name="nivelConfidencialidad" required>
                                                     <option value="" selected>Seleccionar</option>
-                                                    <option value="DatosAbiertos">Datos Abiertos</option>
-                                                    <option value="InformacionPublicoClasificado">Informacion Publico Clasificado</option>
-                                                    <option value="InformacionPublicoReservado">Informacion Publico Reservado</option>
+                                                    <option value="DatosAbiertos" <?php if ($oActivo->nivel_confidencialidad) {
+                                                                                        echo "selected";
+                                                                                    } ?>>Datos Abiertos</option>
+                                                    <option value="InformacionPublicoClasificado" <?php if ($oActivo->nivel_confidencialidad) {
+                                                                                                        echo "selected";
+                                                                                                    } ?>>Informacion Publico Clasificado</option>
+                                                    <option value="InformacionPublicoReservado" <?php if ($oActivo->nivel_confidencialidad) {
+                                                                                                    echo "selected";
+                                                                                                } ?>>Informacion Publico Reservado</option>
                                                 </select>
                                                 <span id="nivelConfidencialidadSpan"></span>
                                             </div>
@@ -180,11 +236,21 @@ $fechaActual = Date("Y-m-d");
                                                 <select class="form-control" id="confidencialidad" name="confidencialidad" onclick="promedio()" required>
                                                     <option value="" selected>Seleccionar</option>
                                                     <option value="" selected>Seleccionar</option>
-                                                    <option value="1">1 (Muy Bajo)</option>
-                                                    <option value="2">2 (Bajo)</option>
-                                                    <option value="3">3 (Medio)</option>
-                                                    <option value="4">4 (Alto)</option>
-                                                    <option value="5">5 (Muy Alto)</option>
+                                                    <option value="1" <?php if ($oActivo->confidelidad) {
+                                                                            echo "selected";
+                                                                        } ?>>1 (Muy Bajo)</option>
+                                                    <option value="2" <?php if ($oActivo->confidelidad) {
+                                                                            echo "selected";
+                                                                        } ?>>2 (Bajo)</option>
+                                                    <option value="3" <?php if ($oActivo->confidelidad) {
+                                                                            echo "selected";
+                                                                        } ?>>3 (Medio)</option>
+                                                    <option value="4" <?php if ($oActivo->confidelidad) {
+                                                                            echo "selected";
+                                                                        } ?>>4 (Alto)</option>
+                                                    <option value="5" <?php if ($oActivo->confidelidad) {
+                                                                            echo "selected";
+                                                                        } ?>>5 (Muy Alto)</option>
                                                 </select>
                                                 <span id="confidencialidadSpan"></span>
                                             </div>
@@ -192,11 +258,21 @@ $fechaActual = Date("Y-m-d");
                                                 <label>Integridad<span class="text-danger">*</span></label>
                                                 <select class="form-control" id="integridad" name="integridad" onclick="promedio()" ; required>
                                                     <option value="" selected>Seleccionar</option>
-                                                    <option value="1">1 (Muy Bajo)</option>
-                                                    <option value="2">2 (Bajo)</option>
-                                                    <option value="3">3 (Medio)</option>
-                                                    <option value="4">4 (Alto)</option>
-                                                    <option value="5">5 (Muy Alto)</option>
+                                                    <option value="1" <?php if ($oActivo->integridad) {
+                                                                            echo "selected";
+                                                                        } ?>>1 (Muy Bajo)</option>
+                                                    <option value="2" <?php if ($oActivo->integridad) {
+                                                                            echo "selected";
+                                                                        } ?>>2 (Bajo)</option>
+                                                    <option value="3" <?php if ($oActivo->integridad) {
+                                                                            echo "selected";
+                                                                        } ?>>3 (Medio)</option>
+                                                    <option value="4" <?php if ($oActivo->integridad) {
+                                                                            echo "selected";
+                                                                        } ?>>4 (Alto)</option>
+                                                    <option value="5" <?php if ($oActivo->integridad) {
+                                                                            echo "selected";
+                                                                        } ?>>5 (Muy Alto)</option>
                                                 </select>
                                                 <span id="integridadSpan"></span>
                                             </div>
@@ -204,22 +280,32 @@ $fechaActual = Date("Y-m-d");
                                                 <label>Disponibilidad<span class="text-danger">*</span></label>
                                                 <select class="form-control" id="disponibilidad" name="disponibilidad" onclick="promedio()" required>
                                                     <option value="" selected>Seleccionar</option>
-                                                    <option value="1">1 (Muy Bajo)</option>
-                                                    <option value="2">2 (Bajo)</option>
-                                                    <option value="3">3 (Medio)</option>
-                                                    <option value="4">4 (Alto)</option>
-                                                    <option value="5">5 (Muy Alto)</option>
+                                                    <option value="1" <?php if ($oActivo->disponibilidad) {
+                                                                            echo "selected";
+                                                                        } ?>>1 (Muy Bajo)</option>
+                                                    <option value="2" <?php if ($oActivo->disponibilidad) {
+                                                                            echo "selected";
+                                                                        } ?>>2 (Bajo)</option>
+                                                    <option value="3" <?php if ($oActivo->disponibilidad) {
+                                                                            echo "selected";
+                                                                        } ?>>3 (Medio)</option>
+                                                    <option value="4" <?php if ($oActivo->disponibilidad) {
+                                                                            echo "selected";
+                                                                        } ?>>4 (Alto)</option>
+                                                    <option value="5" <?php if ($oActivo->disponibilidad) {
+                                                                            echo "selected";
+                                                                        } ?>>5 (Muy Alto)</option>
                                                 </select>
                                                 <span id="disponibilidadSpan"></span>
                                             </div>
                                             <div class="col col-xl-4 col-md-6 col-12">
                                                 <label>Valor<span class="text-danger">*</span></label>
-                                                <input type="number" class="form-control" id="valor" name="valor" min="1" max="5" readonly required>
+                                                <input type="number" class="form-control" id="valor" name="valor" value="<?php echo $oActivo->valor; ?>" min="1" max="5" readonly required>
                                                 <span id="valorSpan"></span>
                                             </div>
                                             <div class="col col-xl-4 col-md-6 col-12">
                                                 <label>Nivel Tasacion<span class="text-danger">*</span></label>
-                                                <input type="text" class="form-control" id="nivelTasacion" name="nivelTasacion" minlength="1" maxlength="10" readonly required>
+                                                <input type="text" class="form-control" id="nivelTasacion" name="nivelTasacion" value="<?php echo $oActivo->nivel_tasacion; ?>" minlength="1" maxlength="10" readonly required>
                                                 <span id="nivelTasacionSpan"></span>
                                             </div>
                                         </div>

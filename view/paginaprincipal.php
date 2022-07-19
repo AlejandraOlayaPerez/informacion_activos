@@ -28,8 +28,9 @@
                         <div class="features-list">
                             <div class="row">
                                 <div class="col-sm-6 col-md-4 col-lg-4">
+                                
                                     <div class="feature-block bootdey" style="visibility: visible;">
-                                        <div class="ico fa fa-magic"></div>
+                                        <div class="ico fas fa-plus-square"></div>
                                         <div class="name">
                                             Crear Activo de informacion
                                         </div>
@@ -41,25 +42,25 @@
                                 </div>
                                 <div class="col-sm-6 col-md-4 col-lg-4">
                                     <div class="feature-block bootdey" style="visibility: visible;">
-                                        <div class="ico fa fa-magnet"></div>
+                                        <div class="ico fas fa-edit"></div>
                                         <div class="name">
                                             Modificar Activo de informacion
                                         </div>
                                         <div class="text">En caso de equivocacion en el activo, modificar el inventario de estos para tener los datos en un solo lugar y de manera organizada.</div>
                                         <div class="more">
-                                            <a href="/informacion_activos/view/activoinformacion.php" class="btn btn-dark">Modificar activo</a>
+                                            <a href="/informacion_activos/view/tablaAct.php?activo=editar" class="btn btn-dark">Modificar activo</a>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col-sm-6 col-md-4 col-lg-4">
                                     <div class="feature-block bootdey" style="visibility: visible;">
-                                        <div class="ico fa fa-gift"></div>
+                                        <div class="ico fas fa-trash-alt"></div>
                                         <div class="name">
                                             Eliminar Activo de informacion
                                         </div>
                                         <div class="text">En caso de equivocacion en el activo, eliminar el inventario de estos para tener los datos en un solo lugar y de manera organizada.</div>
                                         <div class="more">
-                                            <a href="/informacion_activos/view/activoinformacion.php" class="btn btn-dark">Elimina activo</a>
+                                            <a href="/informacion_activos/view/tablaAct.php?activo=eliminar" class="btn btn-dark">Eliminar activo</a>
                                         </div>
                                     </div>
                                 </div>
@@ -69,6 +70,17 @@
                 </div>
             </div>
         </section>
+        <footer class="footer_area">
+            <div class="row">
+                <div class="col-12">
+                    <div class="single-footer-widget">
+                        <div class="footer"></div>
+                        <p>ESE RED DE SERVICIOS DE PRIMER NIVEL</p>
+                    </div>
+                </div>
+            </div>
+        </footer>
+        <br>
     </div>
 
 </body>
