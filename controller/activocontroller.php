@@ -25,7 +25,7 @@ switch ($funcion) {
     case "consultarAreaID":
         $oactivoController->consultarAreaID();
         break;
-    case "editarArea":
+    case "actualizarArea":
         $oactivoController->editarArea();
         break;
     case "listarActivo":
@@ -121,8 +121,6 @@ class activoController
       
         }
     }
-
-
 
     //Area
 
@@ -261,9 +259,9 @@ class activoController
         $oActivo->eliminarActivo();
 
         if ($oActivo->eliminarActivo()) {
-            header("location: ../view/tablaAct.php?tipoMensaje=" . $oMensaje->tipoCorrecto . "&mensaje=Se+ha+eliminado+correctamente+el+activo+de+informacion"."&activo=editar"."&idFormato=" . $_GET['idFormato']);
+            header("location: ../view/tablaAct.php?tipoMensaje=" . $oMensaje->tipoCorrecto . "&mensaje=Se+ha+eliminado+correctamente+el+activo+de+informacion"."&activo=eliminar"."&idFormato=" . $_GET['idFormato']);
         } else {
-            header("location: ../view/tablaAct.php?tipoMensaje=" . $oMensaje->tipoError . "&mensaje=Se+ha+producido+un+error"."&activo=editar"."&idFormato=" . $_GET['idFormato']);
+            header("location: ../view/tablaAct.php?tipoMensaje=" . $oMensaje->tipoError . "&mensaje=Se+ha+producido+un+error"."&activo=eliminar"."&idFormato=" . $_GET['idFormato']);
         }
     }
 

@@ -108,7 +108,7 @@ $oActivo = $oactivoController->consultarFormatoId($_GET['idFormato']);
                                         </div>
                                         <br>
                                         <button style="margin: 5px;" class="btn btn-info float-right" type="button" onclick="validarPagina1();"></i> Siguiente</button>
-                                        <a style="margin: 5px;" href="tablaAct.php" class="btn btn-dark"> Atras</a>
+                                        <a style="margin: 5px;" href="tablaAct.php?activo=editar" class="btn btn-dark"> Atras</a>
                                     </div>
 
                                     <div id="descripcion-part" class="content" role="tabpanel" aria-labelledby="descripcion-part-trigger">

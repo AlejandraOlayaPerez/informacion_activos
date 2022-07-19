@@ -4,7 +4,7 @@ body {
 
 .Caja{
    background-color: rgba(41, 189, 41, 0.541);
-   width: 1000px;
+   width: auto;
    border: 2px solid green;
    border-radius: 8px;
    padding: 5px;

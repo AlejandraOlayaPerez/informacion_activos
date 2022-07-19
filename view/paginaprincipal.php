@@ -36,7 +36,7 @@
                                         </div>
                                         <div class="text">Se deben identificar todos los activos de la compañía, crear un inventario de estos para tener los datos en un solo lugar y de manera organizada.</div>
                                         <div class="more">
-                                            <a href="/informacion_activos/view/activoinformacion.php" class="btn btn-dark">Crear activo</a>
+                                            <a href="/informacion_activos/view/activoinformacion.php" class="btn btn-dark"><i class="fas fa-plus-square"></i> Crear activo</a>
                                         </div>
                                     </div>
                                 </div>
@@ -48,7 +48,7 @@
                                         </div>
                                         <div class="text">En caso de equivocacion en el activo, modificar el inventario de estos para tener los datos en un solo lugar y de manera organizada.</div>
                                         <div class="more">
-                                            <a href="/informacion_activos/view/tablaAct.php?activo=editar" class="btn btn-dark">Modificar activo</a>
+                                            <a href="/informacion_activos/view/tablaAct.php?activo=editar" class="btn btn-dark"><i class="fas fa-edit"></i>  Modificar activo</a>
                                         </div>
                                     </div>
                                 </div>
@@ -60,7 +60,7 @@
                                         </div>
                                         <div class="text">En caso de equivocacion en el activo, eliminar el inventario de estos para tener los datos en un solo lugar y de manera organizada.</div>
                                         <div class="more">
-                                            <a href="/informacion_activos/view/tablaAct.php?activo=eliminar" class="btn btn-dark">Eliminar activo</a>
+                                            <a href="/informacion_activos/view/tablaAct.php?activo=eliminar" class="btn btn-dark"><i class="fas fa-trash-alt"></i>  Eliminar activo</a>
                                         </div>
                                     </div>
                                 </div>

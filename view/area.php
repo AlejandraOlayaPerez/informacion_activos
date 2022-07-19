@@ -19,7 +19,7 @@ require_once 'header.php';
 
     <div id="container" class="container" style="margin-top: 30px;">
 
-        <button type="button" class="btn btn-success float-right" data-toggle="modal" data-target="#modal-area"><i class="fas fa-plus-square"></i>  Agregar Empresa</button>
+        <button type="button" class="btn btn-success float-right" data-toggle="modal" data-target="#modal-area"><i class="fas fa-plus-square"></i> Agregar Empresa</button>
         <br>
         <div class="row">
             <?php
@@ -37,7 +37,7 @@ require_once 'header.php';
                             <a href="areaClasificacion.php?area=<?php echo $registro['id_area']; ?>" class="btn btn-info"> <i class="fas fa-eye"></i> Ver.</a>
                             <!-- data-id="<?php //echo $registro['id_area']; 
                                             ?> -->
-                            <a class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#modal-editar-area" onclick="ajaxEditarArea(<?php echo $registro['id_area']; ?>)"><i class="fas fa-edit"></i> Editar</a>
+                            <a class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#modal-editar-area" onclick="ajaxEditarArea(<?php echo $registro['id_area']; ?>, '<?php echo $registro['area']; ?>' )"><i class="fas fa-edit"></i> Editar</a>
                             <a class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#eliminarArea" onclick="eliminarArea(<?php echo $registro['id_area']; ?>)"><i class="fas fa-trash-alt"></i> Eliminar</a>
                         </div>
 
@@ -62,29 +62,14 @@ require_once 'header.php';
         <br>
     </div>
 
-
-
+    <script src="/informacion_activos/assets/plugins/jquery/jquery.min.js"></script>
+    <!-- <script src="../assets/js/js/areaE.js"></script> -->
     <script src="../assets/js/js/eliminar.js"></script>
     <script src="../assets/js/js/validaciones.js"></script>
     <script>
-        function ajaxEditarArea(id_area) {
-            document.getElementById("id").value = id_area;
-
-            $.ajax({
-                url: '../controller/activocontroller.php',
-                type: 'GET',
-                data: {
-                    id_area: id_area,
-                    funcion: "consultarAreaID"
-                }
-            }).done(function(data) {
-                document.getElementById("editarArea").innerHTML = data['area'];
-
-            })
-        }
-
-        function areaEditar(a) {
-
+        function ajaxEditarArea(id_area, area) {
+            document.getElementById("id_area").value = id_area;
+            document.getElementById("editarArea").value = area;
         }
     </script>
     <script>
@@ -163,10 +148,10 @@ require_once 'header.php';
             </div>
             <div class="modal-body1">
                 <form action="../controller/activocontroller.php" method="GET" id="formulario2" class="formulario">
-                    <div class="col-12">
+                    <div class="col-12" id="conArea">
                         <label>Nombre Area<span class="text-danger">*</span></label>
-                        <input type="text" name="funcion" value="editarArea" style="display:none">
-                        <input type="text" name="id_area" id="id" style="display:none">
+                        <input type="text" name="funcion" value="actualizarArea" style="display:none">
+                        <input type="text" name="id_area" id="id_area" style="display:none">
                         <input type="text" class="form-control" id="editarArea" name="areaNombre" minlength="1" maxlength="100" required>
                         <span id="editarAreaSpan"></span>
                     </div>
