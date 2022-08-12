@@ -10,9 +10,10 @@ require_once 'header.php';
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/informacion_activos/assets/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
-    <link rel="stylesheet" href="/informacion_activos/assets/plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
-    <link rel="stylesheet" href="/informacion_activos/assets/plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
+
+    <!-- <link rel="stylesheet" href="/informacion_activos/assets/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
+    <link rel="stylesheet" href="/informacion_activos/plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
+    <link rel="stylesheet" href="/informacion_activos/assets/plugins/datatables-buttons/css/buttons.bootstrap4.min.css"> -->
     <title>Informacion</title>
 </head>
 
@@ -76,8 +77,11 @@ require_once 'header.php';
         </div>
 
         <div class="card">
+            <!-- <div class="card-body">
+                <table id="example1" class="table table-responsive p-0" style="height: 500px"> -->
             <div class="card-body">
                 <table class="table table-responsive p-0" style="height: 1000px">
+
                     <thead>
                         <tr>
                             <th>#</th>
@@ -121,6 +125,7 @@ require_once 'header.php';
 
     <script src="../assets/js/js/informacion.js"></script>
     <script src="/informacion_activos/assets/plugins/jquery/jquery.min.js"></script>
+    <!-- <script src="/informacion_activos/assets/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
     <script src="/informacion_activos/assets/plugins/datatables/jquery.dataTables.min.js"></script>
     <script src="/informacion_activos/assets/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
     <script src="/informacion_activos/assets/plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
@@ -133,6 +138,25 @@ require_once 'header.php';
     <script src="/informacion_activos/assets/plugins/datatables-buttons/js/buttons.html5.min.js"></script>
     <script src="/informacion_activos/assets/plugins/datatables-buttons/js/buttons.print.min.js"></script>
     <script src="/informacion_activos/assets/plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
+    <script>
+        $(function() {
+            $("#example1").DataTable({
+                "responsive": true,
+                "lengthChange": false,
+                "autoWidth": false,
+                "buttons": ["excel"]
+            }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+            $('#example2').DataTable({
+                "paging": true,
+                "lengthChange": false,
+                "searching": false,
+                "ordering": true,
+                "info": true,
+                "autoWidth": false,
+                "responsive": true,
+            });
+        });
+    </script> -->
 
     </div>
 

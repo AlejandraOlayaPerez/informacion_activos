@@ -19,7 +19,7 @@ require_once 'header.php';
 
     <div id="container" class="container" style="margin-top: 30px;">
 
-        <button type="button" class="btn btn-success float-right" data-toggle="modal" data-target="#modal-area"><i class="fas fa-plus-square"></i> Agregar Empresa</button>
+        <button type="button" class="btn btn-success float-right" data-toggle="modal" data-target="#modal-area"><i class="fas fa-plus-square"></i> Agregar Area</button>
         <br>
         <div class="row">
             <?php
@@ -28,6 +28,13 @@ require_once 'header.php';
             $result = $oArea->selectArea();
             foreach ($result as $registro) {
             ?>
+
+                <?php
+                if ($registro['area'] == "") {
+                ?>
+                    <h1>NO HAY AREAS CREADAS</h1>
+                <?php } ?>
+
                 <div class="col col-xl-4 col-md-6 col-12">
                     <div class="Caja">
 
